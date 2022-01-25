@@ -22,10 +22,15 @@ Bank.prototype.openAccount = function (holder, balance) {
 
 Bank.prototype.getAccount = function (number) {
 
-  if (number >= this.nextAccountNumber) {
-    return null;
-  } else {
+  var numberArray = [];
+  for (let x = 0; x <= this.accounts.length - 1; x++) {
+    numberArray.push(this.accounts[x].number);
+  }
+  if (numberArray.includes(number)) {
     return this.accounts[number - 1];
+  } else {
+    return null
+    ;
 
   }
 
@@ -35,15 +40,11 @@ Bank.prototype.getTotalAssets = function () {
 
   var total = 0;
 
-  if (this.accounts.length === 0) {
-    return 0;
-  } else {
-    for (let x = 0; x <= this.accounts.length - 1; x++) {
-      var balance = this.accounts[x].getBalance();
-      total = total + balance;
+  for (let x = 0; x <= this.accounts.length - 1; x++) {
+    var balance = this.accounts[x].getBalance();
+    total = total + balance;
 
-    }
-    return total;
   }
+  return total;
 
 };
