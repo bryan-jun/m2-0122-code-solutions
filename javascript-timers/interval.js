@@ -5,7 +5,7 @@ var text = ['3', '2', '1', '~Earth Beeeeloooww Us!'];
 var count = 0;
 
 function update() {
-  message2.innerHTML = text[count];
+  message2.textContent = text[count];
   count += 1;
 
   if (count === 4) {
