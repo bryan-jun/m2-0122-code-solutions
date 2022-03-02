@@ -1,0 +1,75 @@
+    1  exit
+    2  cd repos
+    3  cd m2-0122-code-solutions/
+    4  git branch command-line-basics
+    5  git switch command-line-basics
+    6  cd command-line-basics
+    7  pwd
+    8  man man
+    9  man cat
+   10  cat laziness.txt
+   11  cat impatience.txt
+   12  man cat
+   13  cat hubris.txt
+   14  cat laziness.txt impatience.txt hubris.txt
+   15  cat laziness.txt impatience.txt hubris.txt > three-virtues.txt
+   16  cat three-virtues.txt
+   17  man ls
+   18  ls
+   19  ls lfz-staff
+   20  ls -a lfz-staff
+   21  ls -F lfz-staff
+   22  man ls
+   23  ls -aF lfz-staff
+   24  ls -aF lfz-staff > lfz-staff/contents.txt
+   25  cat lfz-staff/contents.txt
+   26  man pwd
+   27  pwd
+   28  pwd > i-was-here.txt
+   29  ls
+   30  cat i-was-here-txt.
+   31  cat i-was-here.txt 
+   32  man echo
+   33  echo 'Hello, World!'
+   34  echo 'Hello, World!' > hello.txt
+   35  ls
+   36  cat hello.txt
+   37  man touch
+   38  touch tag-youre-it.txt
+   39  ls
+   40  touch boop.txt > snoot/
+   41  man touch
+   42  touch boop.txt > snoot/boop.txt
+   43  ls snoot/
+   44  man mkdir
+   45  ls
+   46  mkdir parent
+   47  ls
+   48  man mkdir
+   49  mkdir -p child > parent
+   50  mkdir -p child > parent/child
+   51  ls
+   52  mkdir -p parent/child/grandchild
+   53  touch .gitkeep > parent/child/grandchild
+   54  touch .gitkeep > parent/child/grandchild/.gitkeep
+   55  ls
+   56  ls -a
+   57  man touch
+   58  ls -a
+   59  man mv
+   60  mv pokiemans pokemon
+   61  ls 
+   62  man rm
+   63  rm lol.txt
+   64  ls
+   65  rm -r kill-me/
+   66  ls
+   67  ls kill-me/
+   68  man cp
+   69  cp and-then.txt no-and-then.txt
+   70  ls
+   71  cat and-then-txt no-and-then.txt
+   72  cat and-then.txt no-and-then.txt
+   73  man history
+   74  history
+   75  history > command-history.txt
