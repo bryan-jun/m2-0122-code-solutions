@@ -49,12 +49,12 @@ app.use(middle);
 
 app.post('/api/notes', (req, res) => {
 
-  if (req.body.content === '') {
+  if (req.body.content === '' || req.body.content === undefined) {
     var error3 = {
       error: 'content is a required field'
     };
     res.status(400).send(error3);
-  } else if (req.body.content !== '') {
+  } else {
     var newEntry = {
       id: data.nextId,
       content: req.body.content
@@ -114,22 +114,23 @@ app.delete('/api/notes/:id', (req, res) => {
 
 );
 
-app.post('/api/notes/:id', (req, res) => {
+app.put('/api/notes/:id', (req, res) => {
   var keys = [];
   for (const key in data.notes) {
     keys.push(key);
   }
-  if (req.body.content === '') {
-    var error5 = {
-      error: 'content is a required field'
-    };
-    res.status(400).send(error5);
-  } else if (isPositiveInteger(req.params.id) === false) {
+
+  if (isPositiveInteger(req.params.id) === false) {
     var error6 = {
       error: 'id must be a positive integer'
 
     };
     res.status(400).send(error6);
+  } else if (req.body.content === '' || req.body.content === undefined) {
+    var error5 = {
+      error: 'content is a required field'
+    };
+    res.status(400).send(error5);
   } else if (keys.includes(req.params.id) === false) {
     var error2 = {
       error: 'cannont find note with id ' + String(req.params.id)
@@ -137,7 +138,7 @@ app.post('/api/notes/:id', (req, res) => {
 
     res.status(404).send(error2);
 
-  } else if (req.body.content !== '' && isPositiveInteger(req.params.id)) {
+  } else if (req.body.content !== '' && isPositiveInteger(req.params.id) && keys.includes(req.params.id) === true) {
 
     data.notes[req.params.id].content = req.body.content;
     fs.writeFile('data.json', JSON.stringify(data), function (err) {
