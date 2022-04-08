@@ -41,7 +41,8 @@ app.get('/api/grades', (req, res) => {
 });
 
 app.post('/api/grades', (req, res) => {
-  if (!Number.isInteger(Number(req.body.score)) || req.body.score < 0 || req.body.score > 100 || req.body.score === '' || req.body.score === undefined || req.body.name === '' || req.body.name === undefined || req.body.course === '' || req.body.course === undefined) {
+  if (!Number.isInteger(Number(req.body.score)) || req.body.score < 0 || req.body.score > 100 || req.body.score === '' || req.body.score === undefined ||
+  req.body.name === '' || req.body.name === undefined || req.body.course === '' || req.body.course === undefined) {
     var error3 = {
       error: 'Invalid grade entry'
     };
@@ -167,40 +168,26 @@ app.delete('/api/grades/:gradeId', (req, res) => {
     return;
   }
 
-  const sql2 = `
-    select "gradeId",
-           "name",
-           "course",
-           "score",
-           "createdAt"
-      from "grades"
-     where "gradeId" = $1
-  `;
-
   const sql = `
     delete from "grades"
     where "gradeId" = $1
+    returning *
   `;
 
   const values = [gradeId];
-
-  db.query(sql2, values)
-    .then(result => {
-      const grade = result.rows[0];
-      if (!grade) {
-        res.status(404).json({
-          error: `Cannot find grade with "gradeId" ${gradeId}`
-        });
-
-      }
-    });
 
   db.query(sql, values)
     .then(result => {
 
       const grade = result.rows[0];
-      res.json(grade);
 
+      if (!grade) {
+        res.status(404).json({
+          error: `Cannot find grade with "gradeId" ${gradeId}`
+        });
+      } else {
+        res.json(grade);
+      }
     })
     .catch(err => {
 
